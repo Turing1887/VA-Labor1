@@ -13,16 +13,14 @@ uw.readUserData()
 
 def submit():
     slider_value = w.get()
-    print(slider_value)
-    pause = slider_value/1000-0.22
+    pause = slider_value/1000
     uw.addUserData(pause)
     audio.step+=1
     audio.playPreset(audio.presets, audio.step, pause)
 
 def play():
     slider_value = w.get()
-    print(slider_value)
-    pause = slider_value/1000-0.22
+    pause = slider_value/1000
     audio.setPause(slider_value/1000)
     audio.playPreset(audio.presets, audio.step, pause)
     
