@@ -7,7 +7,7 @@ user_data = {}
 pauses = []
 filename = 'data.txt'
 
-class UserWriter:
+class JSONWriter:
 
   def __init__(self, name):
     self.name = name

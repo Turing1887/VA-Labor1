@@ -1,15 +1,18 @@
 from tkinter import *
 import audio
-import UserWriter
+import JSONWriter
+import CSVWriter
 
 #Set Username
 print("New User: ")
 username = str(input())
 
 #Initialize UserWriter Class
-uw = UserWriter.UserWriter(username)
+# uw = JSONWriter.JSONWriter(username)
+uw = CSVWriter.CSVWriter(username)
 #First read of data
 uw.readUserData()
+uw.addUserData(username)
 
 def submit():
     slider_value = w.get()
