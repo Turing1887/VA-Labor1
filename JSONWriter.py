@@ -5,7 +5,7 @@ usercount = 0
 user_data = {}
 # user_data['user'] = []
 pauses = []
-filename = 'data.txt'
+filename = 'data.json'
 
 class JSONWriter:
 
@@ -20,6 +20,7 @@ class JSONWriter:
           print('Name: ' + p['name'])
           print('Pauses: ' + str(p['pauses']))
           print('')
+
         print(user_data)
       else:
         print('No User Data Yet')
@@ -29,14 +30,12 @@ class JSONWriter:
     pauses.append(pause)
 
   def writeUserData(self):
-    user_data.update({
-      'user':[
-        {
-          'name': self.name,
-          'pauses': pauses 
-        }
-      ] 
+    user_data['user'].append({
+      "{" +
+        "'name':"+ self.name + "," +
+        "'pauses':" + pauses + 
+     "}" + ","
     })
     print(user_data)
-    with open(filename, 'w+') as outfile:
+    with open(filename, 'a') as outfile:
       json.dump(user_data, outfile)
