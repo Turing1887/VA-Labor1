@@ -1,6 +1,5 @@
 from tkinter import *
 import audio
-import JSONWriter
 import CSVWriter
 
 #Set Username
@@ -8,7 +7,6 @@ print("New User: ")
 username = str(input())
 
 #Initialize UserWriter Class
-# uw = JSONWriter.JSONWriter(username)
 uw = CSVWriter.CSVWriter(username)
 #First read of data
 uw.readUserData()
@@ -18,18 +16,22 @@ def submit():
     slider_value = w.get()
     pause = slider_value/1000
     uw.addUserData(pause)
-    audio.step+=1
     audio.playPreset(audio.presets, audio.step, pause)
+    audio.step+=1
+    if audio.finish == True:
+        uw.writeUserData()
+        end()
 
 def play():
     slider_value = w.get()
     pause = slider_value/1000
-    audio.setPause(slider_value/1000)
     audio.playPreset(audio.presets, audio.step, pause)
-    
+
 root = Tk()
 root.geometry("800x800")
 
+def end():
+    root.destroy()
 
 playbutton = Button(root, text="PLAY", fg="black", command= lambda:play())
 playbutton.pack()

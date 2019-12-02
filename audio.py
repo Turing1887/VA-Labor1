@@ -2,6 +2,7 @@ import numpy as np
 from scipy import signal
 import simpleaudio as sa
 import time
+import CSVWriter
 
 Fs = 44100                      #sampling rate
 Ts = 1.0 / Fs                   #sampling interval
@@ -9,9 +10,7 @@ seconds = 2                     #sound duration
 pauseSeconds = 0.5              #pause duration
 step = 0
 repetition = 10
-
-def setPause(newPause):
-  pauseSeconds = newPause
+finish = False
 
 def sinus(f=1000, seconds=1):
   t = np.arange(0,seconds,Ts)     #time vector (start time, end time, number of entrys between)
@@ -27,7 +26,6 @@ def playAudio(note):
   play_obj.wait_done()
 
 def playPreset(presets, step, pause):
-  #playAudio(sinus())
   sound = []
   if pause < 0:
     pause = 0
@@ -37,6 +35,10 @@ def playPreset(presets, step, pause):
     sound = appendSounds(sound, sin)
     sound = appendSounds(sound, pause)
   playAudio(sound)
+  if step >= len(presets)-1:
+    global finish
+    finish = True
+    return
 
 def appendSounds(baseSignal, addSignal):
   return np.append(baseSignal, addSignal, axis=0)
