@@ -1,5 +1,4 @@
 import numpy as np
-from scipy import signal
 import simpleaudio as sa
 import time
 import CSVWriter
